@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import { baseSchemaOptions, createBaseSchema, IBaseModel } from "./base.model";
 
 export interface IUser extends IBaseModel {
-	name: string;
+	username: string;
 	email: string;
 	password: string;
 	dob?: Date;
@@ -13,10 +13,10 @@ export interface IUser extends IBaseModel {
 }
 
 const userDefinition = {
-	name: {
+	username: {
 		type: String,
-		required: [true, "Name is required"],
-		maxlength: [100, "Name cannot exceed 100 characters"],
+		required: [true, "Username is required"],
+		maxlength: [100, "Username cannot exceed 100 characters"],
 		trim: true,
 	},
 	email: {

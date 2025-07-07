@@ -20,6 +20,7 @@ export const errorHandler: ErrorRequestHandler = (
 	}
 
 	const response: ApiResponse<null> = {
+		code: err.HttpStatus,
 		success: false,
 		message: err.message || "Internal Server Error",
 		error: process.env.NODE_ENV === "production" ? undefined : err.name,

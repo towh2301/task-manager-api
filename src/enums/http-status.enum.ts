@@ -24,7 +24,12 @@ type HttpStatusKey =
 	| "SERVICE_UNAVAILABLE"
 	| "GATEWAY_TIMEOUT"
 	| "INVALID_USER_ID"
-	| "USER_NOT_FOUND";
+	| "USER_NOT_FOUND"
+	| "USER_UPDATED_SUCCESSFULLY"
+	| "USER_EXISTED"
+	| "USER_CREATED_SUCCESSFULLY"
+	| "GET_ALL_USER_SUCCESSFULLY"
+	| "GET_USER_BY_ID_SUCCESSFULLY";
 
 type HttpStatusEntry = {
 	code: number;
@@ -62,4 +67,21 @@ export const HttpStatus: Record<HttpStatusKey, HttpStatusEntry> = {
 
 	INVALID_USER_ID: { code: 1001, message: "Invalid User ID" },
 	USER_NOT_FOUND: { code: 1002, message: "User not found" },
+	USER_UPDATED_SUCCESSFULLY: {
+		code: 1003,
+		message: "User updated successfully",
+	},
+	USER_EXISTED: { code: 1003, message: "User existed" },
+	USER_CREATED_SUCCESSFULLY: {
+		code: 1006,
+		message: "Created user successfully",
+	},
+	GET_ALL_USER_SUCCESSFULLY: {
+		code: 1007,
+		message: "Get all users successfully",
+	},
+	GET_USER_BY_ID_SUCCESSFULLY: {
+		code: 1008,
+		message: "Get user by ID successfully",
+	},
 };
