@@ -29,7 +29,11 @@ type HttpStatusKey =
 	| "USER_EXISTED"
 	| "USER_CREATED_SUCCESSFULLY"
 	| "GET_ALL_USER_SUCCESSFULLY"
-	| "GET_USER_BY_ID_SUCCESSFULLY";
+	| "GET_USER_BY_ID_SUCCESSFULLY"
+	| "WRONG_PASSWORD"
+	| "LOGIN_SUCCESSFULLY"
+	| "INVALID_REFRESH_TOKEN"
+	| "INVALID_ACCESS_TOKEN";
 
 type HttpStatusEntry = {
 	code: number;
@@ -83,5 +87,21 @@ export const HttpStatus: Record<HttpStatusKey, HttpStatusEntry> = {
 	GET_USER_BY_ID_SUCCESSFULLY: {
 		code: 1008,
 		message: "Get user by ID successfully",
+	},
+	WRONG_PASSWORD: {
+		code: 1009,
+		message: "Wrong password",
+	},
+	LOGIN_SUCCESSFULLY: {
+		code: 1010,
+		message: "Login successfully",
+	},
+	INVALID_REFRESH_TOKEN: {
+		code: 1011,
+		message: "Invalid refresh token",
+	},
+	INVALID_ACCESS_TOKEN: {
+		code: 1012,
+		message: "Invalid access token",
 	},
 };

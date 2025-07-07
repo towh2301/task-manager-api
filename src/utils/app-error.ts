@@ -1,15 +1,12 @@
 export class AppError extends Error {
-	public readonly statusCode: number;
+	public readonly errorCode: number;
+	public readonly statusCode: number = 500;
 	public readonly isOperational: boolean;
 
-	constructor(
-		message: string,
-		statusCode: number = 500,
-		isOperational = true
-	) {
+	constructor(message: string, errorCode: number, isOperational = true) {
 		super(message);
 
-		this.statusCode = statusCode;
+		this.errorCode = errorCode;
 		this.isOperational = isOperational;
 
 		// Maintains proper stack trace for where error was thrown (only in V8 engines)

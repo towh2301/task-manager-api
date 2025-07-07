@@ -1,5 +1,5 @@
 import { HttpStatus } from "@/enums/http-status.enum";
-import { IUser, User } from "@/models/user.model";
+import { IUser } from "@/models/user.model";
 import { UserService } from "@/services/user/user.services";
 import { ApiResponse } from "@/types/api-response.type";
 import { AppError } from "@/utils/app-error";

@@ -1,6 +1,6 @@
 import * as z from "zod/v4";
 
-export const loginValidator = z.object({
+export const loginSchema = z.object({
 	username: z
 		.string()
 		.min(5, { error: "Username must be at least 5 characters long" })

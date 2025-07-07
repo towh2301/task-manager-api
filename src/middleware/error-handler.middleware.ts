@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-import * as z from "zod/v4";
 import { HttpStatus } from "@/enums/http-status.enum";
 import { ApiResponse } from "@/types/api-response.type";
 import { AppError } from "@/utils/app-error";
+import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import * as z from "zod/v4";
 
 export const errorHandler: ErrorRequestHandler = (
 	err: any,
@@ -13,9 +13,11 @@ export const errorHandler: ErrorRequestHandler = (
 	let statusCode = HttpStatus.INTERNAL_SERVER_ERROR.code;
 	let message = HttpStatus.INTERNAL_SERVER_ERROR.message;
 	let errorDetail: any = undefined;
+	let errorCode = 400;
 
 	if (err instanceof AppError) {
 		statusCode = err.statusCode;
+		errorCode = err.errorCode;
 		message = err.message;
 	} else if (err instanceof z.ZodError) {
 		statusCode = 400;
@@ -26,7 +28,7 @@ export const errorHandler: ErrorRequestHandler = (
 	}
 
 	const response: ApiResponse<null> = {
-		code: statusCode,
+		code: errorCode,
 		success: false,
 		message,
 		error: process.env.NODE_ENV === "production" ? undefined : errorDetail,
