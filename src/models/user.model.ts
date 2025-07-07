@@ -10,6 +10,7 @@ export interface IUser extends IBaseModel {
 	isActive: boolean;
 	emailVerified: boolean;
 	lastLoginAt?: Date;
+	refreshToken?: string;
 }
 
 const userDefinition = {
@@ -87,6 +88,9 @@ const userDefinition = {
 	},
 	lastLoginAt: {
 		type: Date,
+	},
+	refreshToken: {
+		type: String,
 	},
 } as const;
 

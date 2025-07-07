@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { UserController } from "@/controllers/user.controller";
-import { validate } from "@/middleware/validate.middleware";
 import { updateUserData } from "@/validator/user/update-user.validator";
-import { registerUserSchema } from "@/validator/auth/register.validator";
+import { validate } from "@/middleware/validate.middleware";
 
 const userRouter = Router();
 const userController = new UserController();
@@ -13,11 +12,6 @@ userRouter.put(
 	"/users/:id",
 	validate(updateUserData),
 	userController.updateUserById
-);
-userRouter.post(
-	"/users/create",
-	validate(registerUserSchema),
-	userController.createUser
 );
 
 export default userRouter;

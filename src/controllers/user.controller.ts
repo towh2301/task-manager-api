@@ -13,7 +13,6 @@ export class UserController {
 		this.getAllUser = this.getAllUser.bind(this);
 		this.getUserById = this.getUserById.bind(this);
 		this.updateUserById = this.updateUserById.bind(this);
-		this.createUser = this.createUser.bind(this);
 	}
 
 	getAllUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -89,36 +88,6 @@ export class UserController {
 			};
 
 			res.status(HttpStatus.OK.code).json(response);
-		} catch (err: any) {
-			next(err);
-		}
-	};
-
-	createUser = async (req: Request, res: Response, next: NextFunction) => {
-		try {
-			const id = req.body.id;
-
-			let user: IUser | null = await User.findById(id);
-
-			if (user !== null) {
-				throw new AppError(
-					HttpStatus.USER_EXISTED.message,
-					HttpStatus.USER_EXISTED.code
-				);
-			}
-			user = new User(req.body);
-			user.save();
-
-			const result: ApiResponse<IUser> = {
-				code: HttpStatus.USER_CREATED_SUCCESSFULLY.code,
-				success: true,
-				data: user,
-				message: HttpStatus.USER_CREATED_SUCCESSFULLY.message,
-			};
-
-			console.log("create user status: ", result);
-
-			res.status(HttpStatus.OK.code).json(result);
 		} catch (err: any) {
 			next(err);
 		}
