@@ -37,6 +37,14 @@ const userDefinition = {
 		minlength: [6, "Password must be at least 6 characters"],
 		select: false, // Không return password trong queries
 	},
+	firstName: {
+		type: String,
+		require: true,
+	},
+	lastName: {
+		type: String,
+		require: true,
+	},
 	dob: {
 		type: Date,
 		validateFutureAge: {

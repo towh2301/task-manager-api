@@ -20,7 +20,7 @@ export const validate = (
 			return;
 		}
 
-		(req as any)[target] = result.data;
+		req[target] = result.data;
 		next();
 	};
 

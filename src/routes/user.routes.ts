@@ -2,7 +2,7 @@ import { Router } from "express";
 import { UserController } from "@/controllers/user.controller";
 import { validate } from "@/middleware/validate.middleware";
 import { updateUserData } from "@/validator/user/update-user.validator";
-import { registerUserSchema } from "@/validator/auth/register-user.validator";
+import { registerUserSchema } from "@/validator/auth/register.validator";
 
 const userRouter = Router();
 const userController = new UserController();

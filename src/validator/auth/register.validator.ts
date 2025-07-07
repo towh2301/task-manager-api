@@ -36,6 +36,8 @@ export const registerUserSchema = z.object({
 	password: z
 		.string()
 		.min(6, { error: "Password must be at least 6 characters long" }),
+	firstName: z.string().nonempty({ error: "First name must be filled" }),
+	lastName: z.string().nonempty({ error: "Last name must be filled" }),
 	dob: dobSchema.optional().nullable(), // required if you want to enforce age, optional if flexible
 	avatarUrl: z
 		.url({ error: "Avatar URL must be a valid URL" })
