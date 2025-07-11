@@ -1,5 +1,10 @@
-import mongoose, { Schema } from "mongoose";
-import { baseSchemaOptions, createBaseSchema, IBaseModel } from "./base.model";
+import mongoose from "mongoose";
+import { createBaseSchema, IBaseModel } from "./base.model";
+import { IRole, Role } from "./role.model";
+import { UserRole } from "./user-role.model";
+import { error } from "console";
+import { AppError } from "@/utils/app-error";
+import { userPermissions } from "@/constant/permission.constant";
 
 export interface IUser extends IBaseModel {
 	username: string;
@@ -10,6 +15,7 @@ export interface IUser extends IBaseModel {
 	isActive: boolean;
 	emailVerified: boolean;
 	lastLoginAt?: Date;
+	role: IRole;
 	refreshToken?: string;
 }
 
@@ -85,6 +91,25 @@ const userDefinition = {
 	emailVerified: {
 		type: Boolean,
 		default: false,
+	},
+	role: {
+		type: Role,
+		require: true,
+		default: async () => {
+			const role = await Role.find({
+				roleName: { $regex: `userRole` },
+			}).exec();
+
+			if (!role) {
+				const role = new Role({
+					roleName: "userRole",
+					description: "Role for normal users",
+					permissions: userPermissions,
+				});
+				await role.save();
+			}
+			return role;
+		},
 	},
 	lastLoginAt: {
 		type: Date,

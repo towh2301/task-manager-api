@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { createBaseSchema, IBaseModel } from "./base.model";
+import { validPermissions } from "@/constant/permission.constant";
 
 export interface IRole extends IBaseModel {
 	roleName: string;
@@ -26,18 +27,6 @@ const roleDefinition = {
 		validate: {
 			validator: function (permissions: string[]) {
 				// Validate permission format
-				const validPermissions = [
-					"users.read",
-					"users.write",
-					"users.delete",
-					"projects.read",
-					"projects.write",
-					"projects.delete",
-					"tasks.read",
-					"tasks.write",
-					"tasks.delete",
-					"admin.all",
-				];
 				return permissions.every((perm) =>
 					validPermissions.includes(perm)
 				);

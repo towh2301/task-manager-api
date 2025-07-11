@@ -32,3 +32,14 @@ export const authenticateJWT = (
 		next(err);
 	}
 };
+
+export const verifyPermissionMiddleware = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	try {
+	} catch (error) {
+		next(error);
+	}
+};
