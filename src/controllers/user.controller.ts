@@ -19,7 +19,7 @@ export class UserController {
 
 	getAllUser = async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			if (!hasPermission(req.user, adminPermissions)) {
+			if (!hasPermission((req as any).user, adminPermissions)) {
 				throw new AppError(
 					"You are not admin",
 					HttpStatus.FORBIDDEN.code

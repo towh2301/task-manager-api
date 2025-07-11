@@ -1,10 +1,7 @@
+import { userPermissions } from "@/constant/permission.constant";
 import mongoose from "mongoose";
 import { createBaseSchema, IBaseModel } from "./base.model";
 import { IRole, Role } from "./role.model";
-import { UserRole } from "./user-role.model";
-import { error } from "console";
-import { AppError } from "@/utils/app-error";
-import { userPermissions } from "@/constant/permission.constant";
 
 export interface IUser extends IBaseModel {
 	username: string;
@@ -93,7 +90,7 @@ const userDefinition = {
 		default: false,
 	},
 	role: {
-		type: Role,
+		type: Role.schema,
 		require: true,
 		default: async () => {
 			const role = await Role.find({

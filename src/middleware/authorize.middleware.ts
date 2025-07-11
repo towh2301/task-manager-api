@@ -6,7 +6,7 @@ export const authorize =
 	(requiredPermissions: string[]) =>
 	(req: Request, res: Response, next: NextFunction) => {
 		try {
-			const user = req.user;
+			const user = (req as any).user;
 
 			if (!user) {
 				const response: ApiResponse<any> = {

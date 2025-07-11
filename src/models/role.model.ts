@@ -37,6 +37,5 @@ const roleDefinition = {
 };
 
 const roleSchema = createBaseSchema(roleDefinition);
-roleSchema.index({ roleName: 1 });
 
 export const Role = mongoose.model<IRole>("Role", roleSchema);
