@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
 
-export const authenticateJWT = (
+export const authenticate = (
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -25,21 +25,9 @@ export const authenticateJWT = (
 	const token = authHeader.split(" ")[1] || "";
 
 	try {
-		const user = jwt.verify(token, ACCESS_TOKEN_SECRET);
-		(req as any).user = user;
+		(req as any).user = jwt.verify(token, ACCESS_TOKEN_SECRET);
 		next();
 	} catch (err) {
 		next(err);
-	}
-};
-
-export const verifyPermissionMiddleware = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	try {
-	} catch (error) {
-		next(error);
 	}
 };

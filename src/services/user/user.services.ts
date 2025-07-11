@@ -36,4 +36,17 @@ export class UserService {
 
 		return updatedUser;
 	}
+
+	async getMe(userId: string): Promise<IUser> {
+		const me = await User.findById(userId);
+
+		if (!me) {
+			throw new AppError(
+				HttpStatus.USER_NOT_FOUND.message,
+				HttpStatus.USER_NOT_FOUND.code
+			);
+		}
+
+		return me;
+	}
 }

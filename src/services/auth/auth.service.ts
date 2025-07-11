@@ -66,8 +66,15 @@ export class AuthService {
 			);
 		}
 
-		const accessToken = generateAccessToken({ userId: user.id });
-		const refreshToken = generateRefreshToken({ userId: user.id });
+		const userPayload = {
+			userId: user.id,
+			username: user.username,
+			roleName: user.role.roleName,
+			rolePermission: user.role.permissions,
+		};
+
+		const accessToken = generateAccessToken(userPayload);
+		const refreshToken = generateRefreshToken(userPayload);
 
 		user.refreshToken = refreshToken;
 		await user.save();

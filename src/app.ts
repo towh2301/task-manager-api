@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import { BASE_URL } from "./constant/routes.constant";
-import { authenticateJWT } from "./middleware/auth.middleware";
+import { authenticateJWT } from "./middleware/authenticate.middleware";
 import { errorHandler } from "./middleware/error-handler.middleware";
 import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.routes";

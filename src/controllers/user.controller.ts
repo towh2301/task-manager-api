@@ -1,9 +1,11 @@
+import { adminPermissions } from "@/constant/permission.constant";
 import { HttpStatus } from "@/enums/http-status.enum";
 import { IUser } from "@/models/user.model";
 import { UserService } from "@/services/user/user.services";
 import { ApiResponse } from "@/types/api-response.type";
 import { AppError } from "@/utils/app-error";
 import { NextFunction, Request, Response } from "express";
+import { hasPermission } from "./helpers";
 
 export class UserController {
 	private userService: UserService;
@@ -17,6 +19,13 @@ export class UserController {
 
 	getAllUser = async (req: Request, res: Response, next: NextFunction) => {
 		try {
+			if (!hasPermission(req.user, adminPermissions)) {
+				throw new AppError(
+					"You are not admin",
+					HttpStatus.FORBIDDEN.code
+				);
+			}
+
 			const users: IUser[] = await this.userService.getAllUsers();
 
 			const response: ApiResponse<IUser[]> = {
